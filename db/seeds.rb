@@ -9,7 +9,7 @@ arr = []
 cards.each do |c|
     arr << {name: c["name"], color: c["colorIdentity"], type: c["type"]}
 end
-binding.pry
+
 arr.each do |c| 
     Card.create(name: c[:name], color: c[:color], card_type: c[:type])
 end
