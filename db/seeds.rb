@@ -9,5 +9,5 @@ cards.each do |c|
 end
 
 arr.each do |c| 
-    Card.create(name: c[:name], color: c[:color], card_type: c[:type])
+    Card.create(name: c[:name], color: c[:color][0], card_type: c[:type])
 end
