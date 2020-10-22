@@ -1,5 +1,4 @@
 require_relative '../config/environment'
 
-# Menu.run
+Menu.run
 
-Pry.start
