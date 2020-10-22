@@ -21,6 +21,11 @@ class Deck < ActiveRecord::Base
 
     def color
         #returns color that has highest instance
-        self.cards.max_by{|c| c.color}.color
+        # self.cards.max_by{|c| c.color}.color
+        color = {}
+        self.cards.each do |card|
+            color[card.color] ? color[card.color] += 1 : color[card.color] = 1
+        end
+        color.max_by {|k,v| v}[0]
     end
 end

@@ -6,6 +6,7 @@ class Menu
 
    def greeting
     #returns a welcome message upon log in
+    puts "Welcome"
    end
 
    def options
