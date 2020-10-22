@@ -34,8 +34,6 @@ class Game
 
     def play
         @result = self.users_power > self.computers_power ? "win" : "loss"
-        return "Congratulations! You have bested our computer." if self.result == "win"
-        return "You lost to the computer." if self.result == "loss"
     end
 
 end
