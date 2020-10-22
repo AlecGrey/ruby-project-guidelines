@@ -30,6 +30,7 @@ class Menu
     puts "CREATE a deck"
     puts "REMOVE a deck"
     puts "MODIFY an existing deck"
+    puts "PLAY a game"
     puts "EXIT the program"
     puts ""
    end
@@ -44,6 +45,7 @@ class Menu
       #puts a prompt to add, remove or view cards
       puts "Select an action:"
       puts ""
+      puts "SAMPLE - populates your deck with 40 random cards"
       puts "ADD - add a card"
       puts "REMOVE - remove a card"
       puts "OWNED - view owned cards"
@@ -95,6 +97,13 @@ class Menu
             puts ""
             puts "All current Magic Cards:"
             Card.all_names
+         when response == "sample"
+            deck_obj.build_sample_deck
+            puts ""
+            puts "Your deck has been populated."
+         when response != "exit"
+            puts ""
+            puts "Sorry, I did not understand your request"
          end
       end
    end
@@ -135,6 +144,19 @@ class Menu
                puts ""
                puts "Sorry, that deck was not found."
             end
+         when response == "play"
+            print "Please enter the deck you would like to use: "
+            deck_name = gets.strip
+            if self.deck_names(user).include?(deck_name)
+               game = Game.new(Deck.find_by(name: deck_name))
+               game.play
+               puts "Congratulations! You have bested our computer." if game.result == "win"
+               puts "You lost to the computer." if game.result == "loss"
+            else
+               puts ""
+               puts "Sorry, that deck was not found."
+            end
+
          when response != "exit"
             puts ""
             puts "Sorry, I did not understand your request"

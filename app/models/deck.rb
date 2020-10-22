@@ -3,6 +3,11 @@ class Deck < ActiveRecord::Base
     has_many :deck_cards
     has_many :cards, through: :deck_cards
 
+    def build_sample_deck
+        self.cards.delete_all
+        40.times {|i| self.cards << Card.all.sample}
+    end
+    
     def add_card(name:)
         #adds card(s) to a players deck
        self.cards << Card.find_by(name: name)

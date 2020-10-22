@@ -4,10 +4,16 @@ class Game
 
     @@all =[]
 
+    def self.all
+        @@all
+    end
+
+
     def initialize(deck)
         @user_deck = deck
         @result = nil
         @computer_deck = self.populate_deck
+        @@all << self
     end
 
     def populate_deck
@@ -28,8 +34,8 @@ class Game
 
     def play
         @result = self.users_power > self.computers_power ? "win" : "loss"
-        return "Congratulations" if self.result == "win"
-        return "Sucks, dude." if self.result == "loss"
+        return "Congratulations! You have bested our computer." if self.result == "win"
+        return "You lost to the computer." if self.result == "loss"
     end
 
 end
