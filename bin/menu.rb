@@ -56,7 +56,6 @@ class Menu
 
    def deck_menu(deck_obj)
       #sub menu to add, remove or view cards
-      self.clear_screen
       response = nil
 
       until response == "exit" do
@@ -76,28 +75,28 @@ class Menu
                deck_obj.cards << card_obj
                system("sleep 0.5")
             else
-               puts ""
                puts "that cards was not found."
                system("sleep 0.5")
             end
          when response == "remove"
             self.clear_screen
-            print "please enter a card name: "
+            print "please enter a card name, or ALL for all cards: "
             card = gets.strip
             card_obj = Card.find_by(name: card)
-            if deck_obj.cards.include?(card_obj)
+            if card.downcase == "all"
+               deck_obj.cards.delete_all
+            elsif deck_obj.cards.include?(card_obj)
                deck_obj.cards.delete(card_obj)
                system("sleep 0.5")
             else
-               puts ""
                puts "that cards was not found."
                system("sleep 0.5")
             end
          when response == "owned"
             self.clear_screen
             if deck_obj.cards.length > 0
-               puts ""
                puts "your deck includes:"
+               puts ""
                deck_obj.cards.each {|card| puts card.name}
                system("sleep 0.5")
             else
@@ -106,8 +105,8 @@ class Menu
             end
          when response == "all"
             self.clear_screen
-            puts ""
             puts "All current Magic Cards:"
+            puts ""
             Card.all_names
             system("sleep 0.5")
          when response == "sample"
@@ -118,9 +117,11 @@ class Menu
             system("sleep 0.5")
          when response != "exit"
             self.clear_screen
-            puts ""
             puts "Sorry, I did not understand your request"
             system("sleep 0.5")
+         when response == "exit"
+            self.clear_screen
+            puts "                        Main Menu"
          end
       end
    end
@@ -128,9 +129,9 @@ class Menu
    def main_menu
       user = self.log_in
       self.intro_banner
-      system("sleep 1") 
+      system("sleep 0.5") 
       self.greeting
-      system("sleep 1") 
+      system("sleep 0.5") 
       response = nil
 
       until response == "exit" do
@@ -168,7 +169,6 @@ class Menu
                self.deck_menu(Deck.find_by(name: deck_name))
                system("sleep 0.5")
             else
-               puts ""
                puts "Sorry, that deck was not found."
                system("sleep 0.5")
             end
@@ -183,14 +183,12 @@ class Menu
                puts "You lost to the computer." if game.result == "loss"
                system("sleep 0.5")
             else
-               puts ""
                puts "Sorry, that deck was not found."
                system("sleep 0.5")
             end
 
          when response != "exit"
             self.clear_screen
-            puts ""
             puts "Sorry, I did not understand your request"
             system("sleep 0.5")
          end
