@@ -12,17 +12,20 @@ This application allows a user to create decks, populate them with cards, and do
 3. Plant seed data from API by running `rake db:seed`.
 4. Start the application by running `ruby bin/run.rb` from the root directory of the project.
 
-## Video Demonstration
+### Video Demo
 
-https://youtu.be/OVeGIEJM0c4
+https://www.youtube.com/embed/OVeGIEJM0c4
 
-## Contributors
+### Contributors
 
-Created by Jesse Vaughn and Alec Grey
+1. Jesse Vaughn
+2. Alexander Grey
 
-## License
+Contributions welcome! Send a pull request and we will review it and set you up.
 
-Copyright 2020 Jesse Vaughn & Alexander Grey
+### License
+
+Copyright 2020 Jesse Vaughn and Alexander Grey
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
