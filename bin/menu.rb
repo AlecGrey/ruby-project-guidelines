@@ -198,6 +198,7 @@ class Menu
             system("sleep 0.5")
          end
       end
+      self.end
    end
    
    def line_spacing
@@ -238,4 +239,19 @@ class Menu
       # puts "\e[H\e[2J"
       self.banner
    end
+
+   def end
+      system 'clear'
+      puts '╔════╗╔╗           ╔╗           ╔═╗               ╔╗                     ╔╗'.colorize(:red)
+      puts '║╔╗╔╗║║║           ║║           ║╔╝               ║║                     ║║'.colorize(:yellow)
+      puts '╚╝║║╚╝║╚═╗╔══╗ ╔═╗ ║║╔╗╔══╗    ╔╝╚╗╔══╗╔═╗    ╔══╗║║ ╔══╗ ╔╗ ╔╗╔╗╔═╗ ╔══╗║║'.colorize(:green) 
+      puts '  ║║  ║╔╗║╚ ╗║ ║╔╗╗║╚╝╝║══╣    ╚╗╔╝║╔╗║║╔╝    ║╔╗║║║ ╚ ╗║ ║║ ║║╠╣║╔╗╗║╔╗║╚╝'.colorize(:cyan)
+      puts ' ╔╝╚╗ ║║║║║╚╝╚╗║║║║║╔╗╗╠══║     ║║ ║╚╝║║║     ║╚╝║║╚╗║╚╝╚╗║╚═╝║║║║║║║║╚╝║╔╗'.colorize(:blue)
+      puts ' ╚══╝ ╚╝╚╝╚═══╝╚╝╚╝╚╝╚╝╚══╝     ╚╝ ╚══╝╚╝     ║╔═╝╚═╝╚═══╝╚═╗╔╝╚╝╚╝╚╝╚═╗║╚╝'.colorize(:magenta)
+      puts '                                              ║║          ╔═╝║       ╔═╝║'.colorize(:blue)  
+      puts '                                              ╚╝          ╚══╝       ╚══╝'.colorize(:cyan)
+      system 'sleep 3'
+      system 'clear'
+   end  
+
 end
