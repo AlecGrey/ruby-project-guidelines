@@ -89,7 +89,7 @@ class Menu
                deck_obj.cards.destroy(card_obj)
                system("sleep 0.5")
             else
-               puts "that cards was not found."
+               puts "that card was not found."
                system("sleep 0.5")
             end
          when response == "owned"
@@ -153,7 +153,10 @@ class Menu
             self.clear_screen
             print "Please enter the deck to remove: "
             deck_name = gets.strip
-            if self.deck_names(user).include?(deck_name)
+            if !self.deck_names(user)
+               puts "Sorry, you currently have no decks."
+               system("sleep 0.5")
+            elsif self.deck_names(user).include?(deck_name)
                user.decks.destroy(Deck.find_by(name: deck_name))
                system("sleep 0.5")
             else
@@ -164,7 +167,10 @@ class Menu
             self.clear_screen
             print "Please enter the deck to modify: "
             deck_name = gets.strip
-            if self.deck_names(user).include?(deck_name)
+            if !self.deck_names(user)
+               puts "Sorry, you currently have no decks."
+               system("sleep 0.5")
+            elsif self.deck_names(user).include?(deck_name)
                self.deck_menu(Deck.find_by(name: deck_name))
                system("sleep 0.5")
             else
