@@ -56,95 +56,124 @@ class Menu
 
    def deck_menu(deck_obj)
       #sub menu to add, remove or view cards
+      self.clear_screen
       response = nil
 
       until response == "exit" do
          self.line_spacing
+         system("sleep 0.5")
          self.deck_menu_prompts
          response = gets.strip
          response = response.downcase
 
          case
          when response == "add"
+            self.clear_screen
             print "please enter a card name: "
             card = gets.strip
             card_obj = Card.find_by(name: card)
             if card_obj
                deck_obj.cards << card_obj
+               system("sleep 0.5")
             else
                puts ""
                puts "that cards was not found."
+               system("sleep 0.5")
             end
          when response == "remove"
+            self.clear_screen
             print "please enter a card name: "
             card = gets.strip
             card_obj = Card.find_by(name: card)
             if deck_obj.cards.include?(card_obj)
                deck_obj.cards.delete(card_obj)
+               system("sleep 0.5")
             else
                puts ""
                puts "that cards was not found."
+               system("sleep 0.5")
             end
          when response == "owned"
+            self.clear_screen
             if deck_obj.cards.length > 0
                puts ""
                puts "your deck includes:"
                deck_obj.cards.each {|card| puts card.name}
+               system("sleep 0.5")
             else
                puts "no cards were found!"
+               system("sleep 0.5")
             end
          when response == "all"
+            self.clear_screen
             puts ""
             puts "All current Magic Cards:"
             Card.all_names
+            system("sleep 0.5")
          when response == "sample"
+            self.clear_screen
             deck_obj.build_sample_deck
             puts ""
             puts "Your deck has been populated."
+            system("sleep 0.5")
          when response != "exit"
+            self.clear_screen
             puts ""
             puts "Sorry, I did not understand your request"
+            system("sleep 0.5")
          end
       end
    end
 
    def main_menu
       user = self.log_in
+      self.intro_banner
+      system("sleep 1") 
       self.greeting
+      system("sleep 1") 
       response = nil
 
       until response == "exit" do
          self.line_spacing
+         system("sleep 0.5")
          self.main_menu_options
          response = gets.strip.downcase
 
          case
          when response == "list"
-            puts ""
+            self.clear_screen
             self.deck_names(user) ? puts(self.deck_names(user)) : puts("No decks were found!")
          when response == "create"
+            self.clear_screen
             print "Please name your new deck: "
             deck_name = gets.strip
             user.decks << Deck.create(name: deck_name)
+            system("sleep 0.5")
          when response == "remove"
+            self.clear_screen
             print "Please enter the deck to remove: "
             deck_name = gets.strip
             if self.deck_names(user).include?(deck_name)
                user.decks.delete(Deck.find_by(name: deck_name))
+               system("sleep 0.5")
             else
-               puts ""
                puts "Sorry, that deck was not found."
+               system("sleep 0.5")
             end
          when response == "modify"
+            self.clear_screen
             print "Please enter the deck to modify: "
             deck_name = gets.strip
             if self.deck_names(user).include?(deck_name)
                self.deck_menu(Deck.find_by(name: deck_name))
+               system("sleep 0.5")
             else
                puts ""
                puts "Sorry, that deck was not found."
+               system("sleep 0.5")
             end
          when response == "play"
+            self.clear_screen
             print "Please enter the deck you would like to use: "
             deck_name = gets.strip
             if self.deck_names(user).include?(deck_name)
@@ -152,14 +181,18 @@ class Menu
                game.play
                puts "Congratulations! You have bested our computer." if game.result == "win"
                puts "You lost to the computer." if game.result == "loss"
+               system("sleep 0.5")
             else
                puts ""
                puts "Sorry, that deck was not found."
+               system("sleep 0.5")
             end
 
          when response != "exit"
+            self.clear_screen
             puts ""
             puts "Sorry, I did not understand your request"
+            system("sleep 0.5")
          end
       end
    end
@@ -168,5 +201,37 @@ class Menu
       puts ""
       puts "<>" * 30
       puts ""
+   end
+
+   def intro_banner
+      puts "\e[H\e[2J"
+      puts '╔═╗╔═╗ ╔╗ ╔═══╗    ╔═══╗        ╔╗      ╔══╗       ╔╗   ╔╗'.colorize(:red)  
+      system('sleep 0.2')    
+      puts '║║╚╝║║╔╝╚╗║╔═╗║    ╚╗╔╗║        ║║      ║╔╗║       ║║   ║║'.colorize(:yellow)    
+      system('sleep 0.2')       
+      puts '║╔╗╔╗║╚╗╔╝║║ ╚╝     ║║║║╔══╗╔══╗║║╔╗    ║╚╝╚╗╔╗╔╗╔╗║║ ╔═╝║╔══╗╔═╗'.colorize(:green)
+      system('sleep 0.2')    
+      puts '║║║║║║ ║║ ║║╔═╗     ║║║║║╔╗║║╔═╝║╚╝╝    ║╔═╗║║║║║╠╣║║ ║╔╗║║╔╗║║╔╝'.colorize(:cyan)
+      system('sleep 0.2')    
+      puts '║║║║║║ ║╚╗║╚╩═║    ╔╝╚╝║║║═╣║╚═╗║╔╗╗    ║╚═╝║║╚╝║║║║╚╗║╚╝║║║═╣║║'.colorize(:blue)
+      system('sleep 0.2')    
+      puts '╚╝╚╝╚╝ ╚═╝╚═══╝    ╚═══╝╚══╝╚══╝╚╝╚╝    ╚═══╝╚══╝╚╝╚═╝╚══╝╚══╝╚╝'.colorize(:magenta)
+      puts ""
+   end
+
+   def banner
+      puts '╔═╗╔═╗ ╔╗ ╔═══╗    ╔═══╗        ╔╗      ╔══╗       ╔╗   ╔╗'.colorize(:red)
+      puts '║║╚╝║║╔╝╚╗║╔═╗║    ╚╗╔╗║        ║║      ║╔╗║       ║║   ║║'.colorize(:yellow)
+      puts '║╔╗╔╗║╚╗╔╝║║ ╚╝     ║║║║╔══╗╔══╗║║╔╗    ║╚╝╚╗╔╗╔╗╔╗║║ ╔═╝║╔══╗╔═╗'.colorize(:green) 
+      puts '║║║║║║ ║║ ║║╔═╗     ║║║║║╔╗║║╔═╝║╚╝╝    ║╔═╗║║║║║╠╣║║ ║╔╗║║╔╗║║╔╝'.colorize(:cyan)
+      puts '║║║║║║ ║╚╗║╚╩═║    ╔╝╚╝║║║═╣║╚═╗║╔╗╗    ║╚═╝║║╚╝║║║║╚╗║╚╝║║║═╣║║'.colorize(:blue)
+      puts '╚╝╚╝╚╝ ╚═╝╚═══╝    ╚═══╝╚══╝╚══╝╚╝╚╝    ╚═══╝╚══╝╚╝╚═╝╚══╝╚══╝╚╝'.colorize(:magenta)
+      self.line_spacing
+      
+   end
+
+   def clear_screen
+      puts "\e[H\e[2J"
+      self.banner
    end
 end
