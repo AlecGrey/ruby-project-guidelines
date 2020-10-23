@@ -234,7 +234,8 @@ class Menu
    end
 
    def clear_screen
-      puts "\e[H\e[2J"
+      system 'clear'
+      # puts "\e[H\e[2J"
       self.banner
    end
 end
