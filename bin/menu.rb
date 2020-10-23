@@ -84,9 +84,9 @@ class Menu
             card = gets.strip
             card_obj = Card.find_by(name: card)
             if card.downcase == "all"
-               deck_obj.cards.delete_all
+               deck_obj.cards.destroy_all
             elsif deck_obj.cards.include?(card_obj)
-               deck_obj.cards.delete(card_obj)
+               deck_obj.cards.destroy(card_obj)
                system("sleep 0.5")
             else
                puts "that cards was not found."
@@ -112,7 +112,6 @@ class Menu
          when response == "sample"
             self.clear_screen
             deck_obj.build_sample_deck
-            puts ""
             puts "Your deck has been populated."
             system("sleep 0.5")
          when response != "exit"
@@ -155,7 +154,7 @@ class Menu
             print "Please enter the deck to remove: "
             deck_name = gets.strip
             if self.deck_names(user).include?(deck_name)
-               user.decks.delete(Deck.find_by(name: deck_name))
+               user.decks.destroy(Deck.find_by(name: deck_name))
                system("sleep 0.5")
             else
                puts "Sorry, that deck was not found."
