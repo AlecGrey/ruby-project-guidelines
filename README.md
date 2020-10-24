@@ -2,8 +2,7 @@
 
 ## Description
 
-This application allows a user to create decks, populate them with cards, and do battle with a computer opponent!  It is built entirely with Ruby, and uses Sqlite3 and ActiveRecord to manage the database.  The purpose of this application is to give the user full CRUD, allowing them to create, read, update and destroy both their decks, and the cards within them.
-
+This application allows a user to create decks, populate them with cards, and do battle with a computer opponent!  It is built entirely with Ruby, and uses Sqlite3 and ActiveRecord to manage the database.  The purpose of this application is to give the user full CRUD, allowing them to create, read, update and destroy both their decks, and the cards within them.  The card data used in this application was sourced using the [Magic the Gathering API](https://docs.magicthegathering.io/).
 
 ## Install Instructions
 
