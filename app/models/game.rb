@@ -36,4 +36,8 @@ class Game
         @result = self.users_power > self.computers_power ? "win" : "loss"
     end
 
+    def result_message
+        self.result == "win" ? puts("Congratulations! You have bested our computer.") : puts("You lost to the computer.")
+    end
+
 end
